@@ -1,4 +1,5 @@
 # dotnet folders and files
+*.csproj.user
 bin/
 obj/
 *.user
