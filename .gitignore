@@ -1,0 +1,52 @@
+# dotnet folders and files
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+
+# user configs files
+launchSettings.json
+
+# git configs files
+*.orig
+
+# compilation files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.config
+*.log
+*.csproj.user
+*.mdb
+
+# package files
+*.vsix
+*.zip
+*.tar.gz
+*.nupkg
+
+# dependencies files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# OS temp files
+*.tmp
+*.temp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# IDE config files
+.idea/
+.vs/
+.vscode/
+
+# specific configs
+coink_api/Properties/appsettings.json
+coink_api/Properties/appsettings.Development.json
