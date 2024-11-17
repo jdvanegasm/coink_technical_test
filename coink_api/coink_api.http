@@ -1,6 +1,19 @@
 @coink_api_HostAddress = http://localhost:5154
 
-GET {{coink_api_HostAddress}}/weatherforecast/
+### Obtener usuarios por ubicación
+GET {{coink_api_HostAddress}}/api/users/location?countryId=1&regionId=1&municipalityId=1
 Accept: application/json
 
-###
+### Registrar un nuevo usuario
+POST {{coink_api_HostAddress}}/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "John Doe",
+  "phone": "1234567890",
+  "address": "Main St. 123",
+  "countryId": 1,
+  "regionId": 1,
+  "municipalityId": 1
+}
