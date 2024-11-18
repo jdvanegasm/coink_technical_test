@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace coink_api.Models{
     public class Municipality{
+        [Key]
         [Required(ErrorMessage = "This field is required")]
         public int MunicipalityId {get; set;}
         [Required(ErrorMessage = "This field is required")]

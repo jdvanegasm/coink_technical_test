@@ -12,13 +12,17 @@ namespace coink_api.Controllers{
         }
 
         // post: api/users
-        [HttpPost]
+        [HttpPost("register")]
         public IActionResult RegisterUser([FromBody] User user){
-            var result = _userService.RegisterUser(user);
-            if (!result.Success){
-                return BadRequest(result.Message);
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
             }
-            return Ok(new {Message = "User registered succesfully!"});
+
+            var result = _userService.RegisterUser(user);
+            if(!result.Success){
+                return BadRequest(new {Message = result.Message});
+            }
+            return Ok(new {Message = "User registered successfully!"});
         }
 
         // get: api/users/check-phone?phone=1234567890

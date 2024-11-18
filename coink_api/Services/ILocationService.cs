@@ -1,3 +1,5 @@
+using coink_api.Models;
+
 namespace coink_api.Services{
     public interface ILocationService{
         IEnumerable<Country> GetCountries();

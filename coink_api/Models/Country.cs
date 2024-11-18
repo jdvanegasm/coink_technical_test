@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace coink_api.Models{
     public class Country{
+        [Key]
         [Required(ErrorMessage = "This field is required")]
         public int CountryId {get; set;}
         [Required(ErrorMessage = "This field is required")]

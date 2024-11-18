@@ -1,5 +1,6 @@
-using coink_api.data;
+using Microsoft.EntityFrameworkCore;
 using coink_api.Models;
+using coink_api.data;
 
 namespace coink_api.Services{
     public class UserService: IUserService{
@@ -12,7 +13,7 @@ namespace coink_api.Services{
         public ServiceResult RegisterUser(User user){
             try{
                 _context.Database.ExecuteSqlRaw(
-                    "call sp_register_user({0}, {1}, {2}, {3}, {4}, {5})",
+                    "select sp_register_user({0}, {1}, {2}, {3}, {4}, {5})",
                     user.Name, user.Phone, user.Address, user.UserCountryId, user.UserRegionId, user.UserMunicipalityId
                 );
                 return new ServiceResult {Success = true};
@@ -28,7 +29,7 @@ namespace coink_api.Services{
                     .ExecuteSqlInterpolated($"select sp_check_phone_exists({phone})");
                 return Convert.ToBoolean(result);
             }
-            catch(Exception ex){
+            catch(Exception){
                 return false;
             }
         }

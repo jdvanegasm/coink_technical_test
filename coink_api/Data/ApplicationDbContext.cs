@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-
 using coink_api.Models;
 
 namespace coink_api.data{

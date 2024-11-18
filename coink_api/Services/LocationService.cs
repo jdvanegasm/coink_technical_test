@@ -1,5 +1,6 @@
-using coink_api.data;
+using Microsoft.EntityFrameworkCore;
 using coink_api.Models;
+using coink_api.data;
 
 namespace coink_api.Services{
     public class LocationService : ILocationService{

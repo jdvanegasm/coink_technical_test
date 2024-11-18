@@ -1,4 +1,4 @@
-using Microsfot.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using coink_api.Services;
 
 namespace coink_api.Controllers{

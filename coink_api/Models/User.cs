@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace coink_api.Models{
     public class User{
+        [Key]
         [Required(ErrorMessage = "This field is required")]
         public Guid UserId {get; set;}
         [Required(ErrorMessage = "This field is required")]
