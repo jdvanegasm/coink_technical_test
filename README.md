@@ -1,4 +1,4 @@
-# **coink_technical_test - English**
+# **Coink Technical Test - English**
 ### Backend Developer Technical Test for Coink: A Fintech Startup.
 This repository contains the backend technical test for Coink, a financial technology startup.
 
@@ -195,7 +195,7 @@ I developed this project thinking in a layered architecture to can keep separate
 - **`Program.cs`**: The entry point of the application; configures services and middleware during startup.
 
 ---
-# **coink_technical_test - Español**
+# **Prueba Tecnica de Coink - Español**
 ### Prueba técnica de Backend Developer para Coink: Una startup fintech.
 Este repositorio contiene la prueba técnica de backend para Coink, una startup de tecnología financiera.
 
