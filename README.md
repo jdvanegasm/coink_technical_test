@@ -195,3 +195,198 @@ I developed this project thinking in a layered architecture to can keep separate
 - **`Program.cs`**: The entry point of the application; configures services and middleware during startup.
 
 ---
+# **coink_technical_test - Español**
+### Prueba técnica de Backend Developer para Coink: Una startup fintech.
+Este repositorio contiene la prueba técnica de backend para Coink, una startup de tecnología financiera.
+
+---
+
+# Estructura del Proyecto
+## Ramas:
+El repositorio contiene tres ramas principales:
+1. **main**: La rama principal.
+2. **documentation**: Dedicada a la documentación del proyecto.
+3. **development**: Utilizada para el trabajo de desarrollo en curso.
+
+Anteriormente, los scripts de base de datos se gestionaban en una rama separada. Sin embargo, lo consideré innecesario y esos cambios fueron fusionados en la rama `development`.
+
+---
+
+## **Carpetas**
+El proyecto incluye tres carpetas principales:
+
+1. **coink_api**: 
+   - Contiene el código fuente de la API. Esta carpeta se detallará más adelante.
+
+2. **docs**: 
+   - Incluye el **Diagrama de Entidad-Relación (ERD)**.
+   - Contiene imágenes de prueba de la API en la subcarpeta `api_test_images`.
+
+3. **scripts**:
+   - **`coink_db_setup.sql`**: El script principal para crear la base de datos.
+   - **`coink_db_integrity_test.sql`**: Script para probar las restricciones de la base de datos y la integridad de las claves mediante inserciones y consultas.
+   - **`coink_test_data.sql`**: Script para poblar la base de datos con datos de prueba.
+   - **`coink_stored_procedures.sql`**: Contiene todos los procedimientos almacenados para la base de datos. Asegúrate de que no haya procedimientos duplicados antes de ejecutarlo.
+   - **`coink_sp_test.sql`**: Script para probar la funcionalidad de los procedimientos almacenados.
+
+---
+
+### Advertencia!
+Si estás utilizando **DBeaver**, recomiendo configurar el nombre de la base de datos directamente en la conexión de PostgreSQL. Esto es necesario porque **DBeaver** no soporta comandos como `\c coink_db` para cambiar entre bases de datos y realizar operaciones en un esquema o base de datos recién creada.
+
+### Pasos a seguir
+1. Configura la conexión de PostgreSQL para apuntar directamente a la base de datos que deseas usar (`coink_db`).
+2. Comenta las líneas relacionadas con la creación y eliminación de la base de datos en el script para evitar conflictos con DBeaver:
+
+```postgresql
+   --- drop database if exist coink_db;
+   --- create database coink_db;
+```
+3. Una vez conectado a la base de datos, puedes ejecutar las siguientes operaciones y todo el script se ejecutará correctamente:
+```postgresql
+	drop schema if exists public cascade;
+	create schema public
+```
+### Nota:
+Si utilizas un cliente que soporte el comando `\c`, como `psql`, el script original funcionará:
+
+```postgresql
+drop database if exist coink_db;
+create database coink_db;
+
+\c coink_db;
+
+drop schema if exist public cascade;
+create schema public;
+```
+# **Especificaciones y Archivos de Configuración**
+Aparte de los archivos principales del proyecto generados al ejecutar el comando `dotnet new webapi -n MyAPI`, hay tres archivos prioritarios para levantar el servidor y la API:
+1. **Program.cs**
+2. **appsettings.json**
+3. **launchSettings.json**
+
+El primero y el tercero ya están presentes en la carpeta **coink_api**. Sin embargo, el archivo **appsettings.json** está excluido debido a consideraciones sobre variables de entorno. A continuación, se muestra una plantilla para configurar el proyecto:
+
+---
+
+### **Plantilla de appsettings.json**
+Para ejecutar el proyecto, crea un archivo `appsettings.json` en la carpeta **coink_api** con la siguiente estructura:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=coink_db;Username=your_username;Password=your_password"
+  }
+}
+```
+
+Reemplaza `your_username` y `your_password` con tus credenciales de PostgreSQL.
+
+---
+
+# Fuente de la API
+Desarrollé este proyecto pensando en una arquitectura por capas para mantener separadas las responsabilidades. Sin embargo, encontrarás algunos elementos de otros patrones o arquitecturas, así que esta es una revisión rápida:
+
+#### **1. bin**
+- **Descripción**: Generado automáticamente durante el proceso de compilación.
+- **Contenido**: Archivos compilados como `.dll` y `.exe`.
+- **Uso**: Gestionado por .NET; no es necesario realizar cambios manuales aquí.
+
+---
+
+#### **2. Common**
+- **Descripción**: Contiene utilidades o clases compartidas usadas en varias capas del proyecto.
+- **Contenido típico**:
+  - Clases como `ServiceResult` para respuestas estandarizadas.
+  - Constantes globales o enumeraciones.
+
+---
+
+#### **3. Controllers**
+- **Descripción**: Maneja las solicitudes HTTP entrantes.
+- **Contenido**:
+  - **`LocationController.cs`**: Maneja las solicitudes relacionadas con países, regiones y municipios.
+  - **`UsersController.cs`**: Administra operaciones relacionadas con usuarios.
+- **Responsabilidad**:
+  - Actúa como el punto de entrada para el cliente (por ejemplo, Postman o Swagger) y delega el trabajo a la capa de servicios.
+
+---
+
+#### **4. Data**
+- **Descripción**: Contiene las clases relacionadas con la base de datos.
+- **Contenido**:
+  - **`ApplicationDbContext.cs`**: Define cómo la aplicación interactúa con la base de datos utilizando Entity Framework.
+- **Responsabilidad**:
+  - Configura tablas, relaciones y otros ajustes de la base de datos.
+
+---
+
+#### **5. DTOs (Objetos de Transferencia de Datos)**
+- **Descripción**: Define modelos simplificados usados para transferir datos entre capas.
+- **Contenido**:
+  - Archivos como **`CountryDto.cs`**, **`MunicipalityDto.cs`**, **`RegionDto.cs`**, **`UserByLocationDto.cs`**.
+- **Responsabilidad**:
+  - Actúa como una estructura ligera para intercambiar datos entre capas sin exponer directamente los modelos de la base de datos.
+  - Reduce el acoplamiento entre la base de datos y las capas superiores.
+
+---
+
+#### **6. Middleware**
+- **Descripción**: Contiene componentes personalizados para el manejo de solicitudes y respuestas.
+- **Contenido**:
+  - **`ExceptionMiddleware.cs`**: Maneja globalmente las excepciones no controladas y proporciona respuestas consistentes a los clientes.
+- **Responsabilidad**:
+  - Centraliza el manejo de errores.
+  - Agrega características como logging o autorización para cada solicitud.
+
+---
+
+#### **7. Models**
+- **Descripción**: Representa las tablas de la base de datos como clases.
+- **Contenido**:
+  - Clases como **`Country.cs`**, **`Region.cs`**, **`User.cs`**, etc.
+- **Responsabilidad**:
+  - Refleja el esquema de la base de datos.
+  - Usado en `ApplicationDbContext` para la interacción con la base de datos.
+
+---
+
+#### **8. obj**
+- **Descripción**: Archivos temporales creados durante el proceso de compilación.
+- **Contenido**:
+  - Archivos intermedios utilizados por el compilador de .NET.
+- **Uso**: Similar a `bin`, esto se gestiona automáticamente y no requiere intervención manual.
+
+---
+
+#### **9. Properties**
+- **Descripción**: Contiene archivos de configuración relacionados con el ensamblaje.
+- **Contenido**:
+  - **`launchSettings.json`**: Define configuraciones de desarrollo local, como puertos y perfiles.
+- **Uso**: Usado para configuraciones de depuración y pruebas locales.
+
+---
+
+#### **10. Services**
+- **Descripción**: Contiene la lógica de negocio e implementaciones de servicios.
+- **Contenido**:
+  - **Interfaces**: **`ILocationService.cs`**, **`IUserService.cs`**.
+  - **Implementaciones**: **`LocationService.cs`**, **`UserService.cs`**.
+- **Responsabilidad**:
+  - Implementa la lógica para manejar operaciones clave (por ejemplo, registro de usuarios, validación de ubicaciones).
+  - Actúa como el intermediario entre los controladores y los datos.
+
+---
+
+#### **11. Archivos raíz**
+- **`appsettings.json`**: Archivo de configuración global del proyecto (por ejemplo, cadenas de conexión de la base de datos).
+- **`coink_api.csproj`**: Archivo de configuración del proyecto utilizado por .NET durante la compilación.
+- **`Program.cs`**: El punto de entrada de la aplicación; configura servicios y middleware durante el inicio.
