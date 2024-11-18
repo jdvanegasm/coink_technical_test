@@ -72,6 +72,34 @@ end;
 $$ language plpgsql;
 
 /*
+stored procedure to get all countries
+*/
+create or replace function sp_get_countries()
+returns table (
+	country_id int,
+	country_name varchar,
+	country_code varchar,
+	global_region_name varchar,
+	division_type varchar
+) as $$
+begin
+	return query
+	select
+		c.country_id,
+		c.country_name,
+		c.country_code,
+		gr.region_name as global_region_name,
+		dt.type as division_type
+	from
+		countries c
+	join
+		global_regions gr on c.global_region_id = gr.global_region_id
+	join
+		divisions_types dt on c.division_id = dt.division_id;
+end;
+$$ language plpgsql;
+
+/*
 stored procedure to get municipalities of a region
 */
 create or replace function sp_get_municipalities_by_region(p_region_id int)
@@ -104,7 +132,7 @@ end;
 $$ language plpgsql;
 
 /*
-stored procedure to get de ubication hierarchy
+stored procedure to get de ubication hierarchy (not implemented in the API)
 */
 create or replace function sp_validate_location(
 	p_country_id int,
