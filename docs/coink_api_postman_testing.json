@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "3dfe04f4-e5f4-4c5e-98ae-658cfdf3f2cc",
+		"name": "coink_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39790840"
+	},
+	"item": [
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sandra Bullock\",\n    \"phone\": \"324558494\",\n    \"address\": \"321 Main St\",\n    \"userCountryId\": 1,\n    \"userRegionId\": 1,\n    \"userMunicipalityId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5154/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "duplicated name validation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Jane Doe\",\n    \"phone\": \"1234567899\",\n    \"address\": \"321 Main St\",\n    \"userCountryId\": 1,\n    \"userRegionId\": 1,\n    \"userMunicipalityId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5154/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "duplicated phone validation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Joe Doe\",\n    \"phone\": \"1234567890\",\n    \"address\": \"321 Main St\",\n    \"userCountryId\": 1,\n    \"userRegionId\": 1,\n    \"userMunicipalityId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5154/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hierarchy validation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Marilyn Monroe\",\n    \"phone\": \"3322110044\",\n    \"address\": \"321 Main St\",\n    \"userCountryId\": 1,\n    \"userRegionId\": 4,\n    \"userMunicipalityId\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5154/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				},
+				"description": "hierarchy validation"
+			},
+			"response": []
+		},
+		{
+			"name": "check phone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5154/api/users/check-phone?phone=1234567890",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"check-phone"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "1234567890"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user by location",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5154/api/users/by-location?countryId=1&regionId=1&municipalityId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"by-location"
+					],
+					"query": [
+						{
+							"key": "countryId",
+							"value": "1"
+						},
+						{
+							"key": "regionId",
+							"value": "1"
+						},
+						{
+							"key": "municipalityId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Jane Doe Updated\",\n\"phone\": \"1234567890\",\n\"address\": \"321 Main St\",\n\"userCountryId\": 1,\n\"userRegionId\": 1,\n\"userMunicipalityId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5154/api/users/{dfb87502-8a61-4465-9933-886fac5f51e4}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"{dfb87502-8a61-4465-9933-886fac5f51e4}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5154/api/users/{userId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"users",
+						"{userId}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get countries",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5154/api/location/countries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"location",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get regions by country",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5154/api/location/regions?countryId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"location",
+						"regions"
+					],
+					"query": [
+						{
+							"key": "countryId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get municipalities by region",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5154/api/location/municipalities?regionId=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5154",
+					"path": [
+						"api",
+						"location",
+						"municipalities"
+					],
+					"query": [
+						{
+							"key": "regionId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
