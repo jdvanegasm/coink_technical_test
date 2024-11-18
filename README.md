@@ -96,7 +96,6 @@ Replace `your_username` and `your_password` with your PostgreSQL credentials.
 
 ---
 
-```
 # API source
 I developed this project thinking in a layered architecture to can keep separated the responsibilities, however, you will find some elements of other patterns or architecture, so this is a pretty quick review:
 #### **1. bin**
