@@ -19,6 +19,7 @@ namespace coink_api.Controllers{
         }
 
         // get: api/location/regions
+        [HttpGet("regions")]
         public IActionResult GetRegionsByCountry(int countryId){
             var regions = _locationService.GetRegionsByCountry(countryId);
             return Ok(regions);

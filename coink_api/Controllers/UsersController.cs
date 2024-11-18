@@ -13,7 +13,7 @@ namespace coink_api.Controllers{
 
         // post: api/users
         [HttpPost]
-        public IActionResult RegisterUser([FromBody] UsersController user){
+        public IActionResult RegisterUser([FromBody] User user){
             var result = _userService.RegisterUser(user);
             if (!result.Success){
                 return BadRequest(result.Message);
@@ -21,10 +21,10 @@ namespace coink_api.Controllers{
             return Ok(new {Message = "User registered succesfully!"});
         }
 
-        // get: api/users/check-phone?pone=1234567890
+        // get: api/users/check-phone?phone=1234567890
         [HttpGet("check-phone")]
         public IActionResult CheckPhone(string phone){
-            var exist = _userService.CheckPhoneExists(phone);
+            var exists = _userService.CheckPhoneExists(phone);
             return Ok(new {PhoneExists = exists});
         }
 
