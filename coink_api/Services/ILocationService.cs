@@ -1,9 +1,10 @@
 using coink_api.Models;
+using coink_api.DTOs;
 
 namespace coink_api.Services{
     public interface ILocationService{
-        IEnumerable<Country> GetCountries();
-        IEnumerable<Region> GetRegionsByCountry(int countryId);
-        IEnumerable<Municipality> GetMunicipalitiesByRegion(int regionId);
+        IEnumerable<CountryDto> GetCountries();
+        IEnumerable<RegionDto> GetRegionsByCountry(int countryId);
+        IEnumerable<MunicipalityDto> GetMunicipalitiesByRegion(int regionId);
     }
 }

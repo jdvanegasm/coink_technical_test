@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using coink_api.Models;
 using coink_api.data;
+using coink_api.DTOs;
 
 namespace coink_api.Services{
     public class LocationService : ILocationService{
@@ -10,20 +11,20 @@ namespace coink_api.Services{
             _context = context;
         }
 
-        public IEnumerable<Country> GetCountries(){
-            return _context.Countries.FromSqlRaw("select * from countries").ToList();
+        public IEnumerable<CountryDto> GetCountries(){
+            return _context.Set<CountryDto>().FromSqlRaw("select * from public.sp_get_countries()").ToList();
         }
 
-        public IEnumerable<Region> GetRegionsByCountry(int countryId){
-            return _context.Regions.FromSqlRaw(
-                "select * from sp_get_regions_by_country({0})",
+        public IEnumerable<RegionDto> GetRegionsByCountry(int countryId){
+            return _context.Set<RegionDto>().FromSqlRaw(
+                "select * from public.sp_get_regions_by_country({0})",
                 countryId
             ).ToList();
         }
 
-        public IEnumerable<Municipality> GetMunicipalitiesByRegion(int regionId){
-            return _context.Municipalities.FromSqlRaw(
-                "select * from sp_get_municipalities_by_region({0})",
+        public IEnumerable<MunicipalityDto> GetMunicipalitiesByRegion(int regionId){
+            return _context.Set<MunicipalityDto>().FromSqlRaw(
+                "select * from public.sp_get_municipalities_by_region({0})",
                 regionId
             ).ToList();
         }
