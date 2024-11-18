@@ -62,13 +62,6 @@ create database coink_db;
 drop schema if exist public cascade;
 create schema public;
 ```
-# Specifications and settings files
-Ignoring the core project api files that the command "dotnet new webapi -n MyAPI" creates, there is just 3 really important configuration archives to get the server and the API up:
-1. Program.cs
-2. appsettings.json
-3. launchSettings.json
-You have into coink_api folder the first one and the last one but not the second one because of environment variables, then Im going to leave you the template so you can run the project.
-
 ---
 
 # **Specifications and Configuration Files**
