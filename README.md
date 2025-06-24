@@ -4,7 +4,7 @@ This repository contains the backend technical test for Coink, a financial techn
 
 ---
 
-# Proyect Structure
+# Project Structure
 ## Branches:
 The repository contains three main branches:
 1. **main**: The primary branch.
